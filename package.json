@@ -1,0 +1,28 @@
+{
+	"name": "fireoauth",
+	"version": "1.0.0",
+	"description": "Fire OAuth",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Fire-OAuth/fire-server/tree/main"
+	},
+	"keywords": [
+		"fire",
+		"oauth",
+		"passwordless"
+	],
+	"author": "fireoauth, tharunoptimus",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.17.1",
+		"express-session": "^1.17.2",
+		"mongodb": "^4.1.2",
+		"mongoose": "^6.0.7",
+		"pug": "^3.0.2",
+		"socket.io": "^4.2.0"
+	}
+}
