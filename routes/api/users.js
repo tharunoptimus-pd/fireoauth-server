@@ -10,6 +10,11 @@ const API = require("../../schemas/APISchema");
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 
+router.get("/", (req, res) => {
+    res.send("meow"
+    )
+})
+
 // router.get("/", async (req, res, next) => {
 //     var searchObj = req.query;
 //     if(req.query.search !== undefined) {
