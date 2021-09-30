@@ -1,6 +1,6 @@
 const express = require("express")
 const app = express()
-
+const mongoose = require("./database")
 const port = process.env.PORT || 3003
 
 const server = app.listen(port, () => {
