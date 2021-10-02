@@ -20,13 +20,13 @@ router.post("/register", async (req, res, next) => {
         const { firstName, lastName, email, password } = req.body;
         if(!firstName || !lastName || !email || !password) {
             return res.status(400).send({
-                errorMessage: "All fields are required"
+                message: "All fields are required"
             })
         }
         const user = await User.findOne({ email });
         if (user != null) {
             return res.status(409).send({
-                errorMessage: "User already exists"
+                message: "User already exists"
             });
         } else {
             const newUser = {
@@ -37,12 +37,15 @@ router.post("/register", async (req, res, next) => {
             }
 
             let newUser = await User.create(newUser)
+            newUser.success = true
             res.status(201).send(newUser)
         }
     } catch (err) {
         res.status(500).send(err)
     }
 })
+
+
 
 
 // router.get("/", async (req, res, next) => {
