@@ -15,6 +15,36 @@ router.get("/", (req, res) => {
     )
 })
 
+router.post("/register", async (req, res, next) => {
+    try {
+        const { firstName, lastName, email, password } = req.body;
+        if(!firstName || !lastName || !email || !password) {
+            return res.status(400).send({
+                errorMessage: "All fields are required"
+            })
+        }
+        const user = await User.findOne({ email });
+        if (user != null) {
+            return res.status(409).send({
+                errorMessage: "User already exists"
+            });
+        } else {
+            const newUser = {
+                firstName,
+                lastName,
+                email,
+                password
+            }
+
+            let newUser = await User.create(newUser)
+            res.status(201).send(newUser)
+        }
+    } catch (err) {
+        res.status(500).send(err)
+    }
+})
+
+
 // router.get("/", async (req, res, next) => {
 //     var searchObj = req.query;
 //     if(req.query.search !== undefined) {
