@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const bcrypt = require("bcrypt");
 const router = express.Router();
 const cryptoString = require('crypto-string')
 const User = require("../../schemas/UserSchema");
@@ -29,6 +30,7 @@ router.post("/register", async (req, res, next) => {
                 message: "User already exists"
             });
         } else {
+            password = await bcrypt.hash(password, 10)
             const newUser = {
                 firstName,
                 lastName,
