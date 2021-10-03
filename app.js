@@ -13,6 +13,15 @@ const server = app.listen(port, () => {
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
+// API Routes
+const usersAPI = require("./routes/api/users")
+const apisAPI = require("./routes/api/apis")
+
+
+app.use('/api/users', usersAPI)
+app.use('/api/apis', apisAPI)
+
+
 app.get("/", (req, res) => {
 	res.status(200).send("Hello World!")
 })
