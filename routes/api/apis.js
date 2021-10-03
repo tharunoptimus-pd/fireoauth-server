@@ -111,11 +111,11 @@ router.post("/api/register", async (req, res, next) => {
     }
 })
 
-router.get("/generate", async (req, res, next) => {
+router.get("/generate/:api", async (req, res, next) => {
     try {
         let domainName = req.body.domainName
         let protocol = req.secure
-        let api = req.body.api
+        let api = req.params.api
         
         console.log({domainName, protocol, api})
 
