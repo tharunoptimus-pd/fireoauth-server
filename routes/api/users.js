@@ -35,7 +35,8 @@ router.post("/register", async (req, res, next) => {
                 firstName,
                 lastName,
                 email,
-                password
+                password,
+                profilePic: `https://avatars.dicebear.com/api/male/${firstName}${lastName}.svg?mood[]=happy`
             }
 
             let newUser = await User.create(newUserData)
