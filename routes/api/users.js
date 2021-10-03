@@ -31,14 +31,14 @@ router.post("/register", async (req, res, next) => {
             });
         } else {
             password = await bcrypt.hash(password, 10)
-            const newUser = {
+            let newUserData = {
                 firstName,
                 lastName,
                 email,
                 password
             }
 
-            let newUser = await User.create(newUser)
+            let newUser = await User.create(newUserData)
             newUser.success = true
             res.status(201).send(newUser)
         }
