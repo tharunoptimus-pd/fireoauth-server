@@ -79,5 +79,26 @@ router.post("/login", async (req, res, next) => {
     }
 })
 
+router.post("/api/register", async (req, res, next) => {
+    try {
+        const { domain, email,  password } = req.body;
+        if( !domain || !email || !password) {
+            return res.status(400).send({
+                message: "All fields are required"
+            })
+        }
+
+        let data = {
+            domain
+        }
+
+        let api = await API.create(data)
+        return res.status(201).send(api)
+
+    } catch (err) {
+        res.status(500).send(err)
+    }
+})
+
 
 module.exports = router;
