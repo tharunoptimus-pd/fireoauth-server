@@ -18,13 +18,13 @@ router.get("/", (req, res) => {
 
 router.post("/register", async (req, res, next) => {
     try {
-        const { firstName, lastName, email, password } = req.body;
+        let { firstName, lastName, email, password } = req.body;
         if(!firstName || !lastName || !email || !password) {
             return res.status(400).send({
                 message: "All fields are required"
             })
         }
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
         if (user != null) {
             return res.status(409).send({
                 message: "User already exists"
@@ -49,13 +49,13 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        let { email, password } = req.body;
         if(!email || !password) {
             return res.status(400).send({
                 message: "All fields are required"
             })
         }
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email })
         if (user == null) {
             return res.status(401).send({
                 message: "User does not exist"
