@@ -113,7 +113,8 @@ router.post("/api/register", async (req, res, next) => {
 
 router.get("/generate/:api", async (req, res, next) => {
     try {
-        let domainName = req.body.domainName
+        let domainName = req.get("Referrer")
+        domainName = domainName.substring(0, domainName.length - 1)
         let protocol = req.secure
         let api = req.params.api
         
