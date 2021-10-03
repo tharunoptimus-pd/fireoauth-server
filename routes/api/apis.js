@@ -9,13 +9,8 @@ const API = require("../../schemas/APISchema");
 const Client = require("../../schemas/ClientSchema");
 
 
-app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-
-router.get("/", (req, res) => {
-    res.send("meow"
-    )
-})
+app.use(express.urlencoded({extended: true}));
 
 router.post("/register", async (req, res, next) => {
     try {
