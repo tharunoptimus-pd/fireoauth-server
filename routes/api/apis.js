@@ -96,5 +96,51 @@ router.post("/api/register", async (req, res, next) => {
     }
 })
 
+router.get("/generate", async (req, res, next) => {
+    try {
+        let domainName = req.body.domainName
+        let protocol = req.secure
+        let api = req.body.api
+        
+        console.log({domainName, protocol, api})
+
+        if(!domainName || !api) {
+            return res.status(400).send({
+                message: "All fields are required"
+            })
+        }
+
+        // Uncomment this line to Use HTTPS
+        // if(!protocol) return res.status(400).send({message: "Protocol must be https"})
+
+        let isGenuineAPI = await API.findById(api)
+
+        if(!isGenuineAPI) {
+            return res.status(401).send({
+                message: "Invalid API"
+            })
+        }
+
+        if(isGenuineAPI.domainName != domainName) {
+            return res.status(401).send({
+                message: "Invalid domain name"
+            })
+        }
+
+        let sessionId = cryptoString(12)
+        let chatRoomId = cryptoString(12)
+
+        let data = {
+            sessionId,
+            chatRoomId
+        }
+
+        res.status(201).send(data)
+
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
+
 
 module.exports = router;
