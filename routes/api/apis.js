@@ -84,12 +84,27 @@ router.post("/api/register", async (req, res, next) => {
             })
         }
 
-        let data = {
-            domainName
-        }
+        let client = await Client.findOne({ email });
 
-        let api = await API.create(data)
-        return res.status(201).send(api)
+        if (client == null) return res.status(401).send({ message: "User does not exist" });
+        else {
+            let result = await bcrypt.compare(password, client.password)
+
+            if(result) {
+                let data = {
+                    domainName
+                }
+        
+                let api = await API.create(data)
+                res.status(201).send(api)
+
+                await Client.findByIdAndUpdate(client._id, { $push: { apis: api._id } })
+
+            }
+            else {
+                return res.status(401).send({ message: "Incorrect password" })
+            }
+        }
 
     } catch (err) {
         res.status(500).send(err)
