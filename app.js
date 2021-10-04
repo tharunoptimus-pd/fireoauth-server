@@ -24,10 +24,12 @@ app.use(express.urlencoded({extended: true}));
 // API Routes
 const usersAPI = require("./routes/api/users")
 const apisAPI = require("./routes/api/apis")
+const tokensAPI = require("./routes/api/tokens")
 
 
 app.use('/api/users', usersAPI)
 app.use('/api/apis', apisAPI)
+app.use('/api/tokens', tokensAPI)
 
 
 app.get("/", (req, res) => {
