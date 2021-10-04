@@ -42,4 +42,29 @@ router.post("/generate", async (req, res) => {
     
 })
 
+router.post("/verify", async (req, res) => {
+	try {
+		let tokenId = req.body.token
+		if (!tokenId) return res.status(400).send({ message: "Missing token" })
+
+		let token = await Token.findByIdAndDelete(tokenId)
+
+		if (token == null) return res.status(401).send({ message: "Token does not exist" })
+
+        let data = {
+            firstName: token.firstName,
+            lastName: token.lastName,
+            email: token.email,
+            profilePic: token.profilePic
+        }
+
+		res.status(200).send(data)
+
+	} catch (error) {
+		res.status(500).send({
+			message: "Something wrong with the server. Try again later",
+		})
+	}
+})
+
 module.exports = router;
