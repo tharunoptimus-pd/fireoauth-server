@@ -38,7 +38,13 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
 
-    console.log("Socket Connection was established by a client")
+    socket.on("join room", sessionId => socket.join(sessionId))
     
+    socket.on("authorized token", (data) => {
+        let token = data.token
+        let sessionId = data.sessionId
+
+        socket.in(sessionId).emit("trusted token", token)
+    })    
 
 })
