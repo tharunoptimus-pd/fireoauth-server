@@ -123,8 +123,7 @@ router.get("/generate/:api", async (req, res, next) => {
             })
         }
 
-        // Uncomment this line to Use HTTPS
-        // if(!protocol) return res.status(400).send({message: "Protocol must be https"})
+        
 
         let isGenuineAPI = await API.findById(api)
 
@@ -133,6 +132,13 @@ router.get("/generate/:api", async (req, res, next) => {
                 message: "Invalid API"
             })
         }
+
+        if(isGenuineAPI.domainName.substring(0, 5) === 'https' && req.protocol !== 'https') {
+            return res.status(401).send({message: "Protocol must be https"})
+        }
+
+        // Uncomment this line to Use HTTPS for all API's
+        // if(!protocol) return res.status(400).send({message: "Protocol must be https"})
 
         if(isGenuineAPI.domainName != domainName) {
             return res.status(401).send({
