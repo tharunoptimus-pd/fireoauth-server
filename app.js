@@ -10,6 +10,7 @@ const port = process.env.PORT || 3003
 const server = app.listen(port, () => {
 	console.log(`Server running on port ${port}`)
 })
+const io = require("socket.io")(server, { pingTimeOut: 60000 })
 
 app.use(cors({
     origin: '*'
@@ -31,4 +32,11 @@ app.use('/api/apis', apisAPI)
 
 app.get("/", (req, res) => {
 	res.status(200).send("Hello World!")
+})
+
+io.on("connection", (socket) => {
+
+    console.log("Socket Connection was established by a client")
+    
+
 })
