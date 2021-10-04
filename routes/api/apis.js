@@ -39,8 +39,7 @@ router.post("/register", async (req, res, next) => {
             res.status(201).send(newClient)
         }
     } catch (err) {
-        console.log(err)
-        res.send(err)
+        res.status(500).send({ message: "Something is wrong with Fire Servers. Try again Later" })
     }
 })
 
@@ -118,8 +117,6 @@ router.get("/generate/:api", async (req, res, next) => {
         let protocol = req.secure
         let api = req.params.api
         
-        console.log({domainName, protocol, api})
-
         if(!domainName || !api) {
             return res.status(400).send({
                 message: "All fields are required"
