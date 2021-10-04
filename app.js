@@ -10,7 +10,13 @@ const port = process.env.PORT || 3003
 const server = app.listen(port, () => {
 	console.log(`Server running on port ${port}`)
 })
-const io = require("socket.io")(server, { pingTimeOut: 60000 })
+const io = require("socket.io")(server, {
+	pingTimeOut: 60000,
+	cors: {
+		origin: "*",
+		methods: ["GET", "POST", "PUT"]
+	},
+})
 
 app.use(cors({
     origin: '*'
