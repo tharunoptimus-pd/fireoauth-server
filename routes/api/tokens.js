@@ -18,6 +18,9 @@ router.post("/generate", async (req, res) => {
         let sessionId = req.body.sessionId
         let userId = req.body.userId
 
+        // get the req.origin and continue only if the origin is valid
+        // todo
+
         if(! sessionId || ! userId) return res.status(400).send({message: "Missing sessionId or userId"})
 
         let user = await User.findById(userId)
