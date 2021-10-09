@@ -31,12 +31,12 @@ router.post("/register", async (req, res, next) => {
                 firstName,
                 lastName,
                 email,
-                password
+                password,
+                profilePic: `https://avatars.dicebear.com/api/male/${firstName}${lastName}.svg?mood[]=happy`
             }
 
             let newUser = await Client.create(newClient)
-            newClient.success = true
-            res.status(201).send(newClient)
+            res.status(201).send(newUser)
         }
     } catch (err) {
         res.status(500).send({ message: "Something is wrong with Fire Servers. Try again Later" })
