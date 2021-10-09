@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const bcrypt = require("bcrypt");
 const router = express.Router();
@@ -8,11 +9,18 @@ const Token = require("../../schemas/TokenSchema");
 const API = require("../../schemas/APISchema");
 const Client = require("../../schemas/ClientSchema");
 
+const FIRE_API_REGISTRATION_URL = "http://localhost:5500"
+
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
-router.post("/register", async (req, res, next) => {
+let corsOptions = {
+    origin: FIRE_API_REGISTRATION_URL
+}
+
+
+router.post("/register", cors(corsOptions), async (req, res, next) => {
     try {
         let { firstName, lastName, email, password } = req.body;
         if(!firstName || !lastName || !email || !password) {
@@ -43,7 +51,7 @@ router.post("/register", async (req, res, next) => {
     }
 })
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", cors(corsOptions), async (req, res, next) => {
     try {
         const { email, password } = req.body;
         if(!email || !password) {
@@ -74,7 +82,7 @@ router.post("/login", async (req, res, next) => {
     }
 })
 
-router.post("/api/register", async (req, res, next) => {
+router.post("/api/register", cors(corsOptions), async (req, res, next) => {
     try {
         let { domainName, email,  password } = req.body;
         if( !domainName || !email || !password) {
