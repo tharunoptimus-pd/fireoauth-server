@@ -152,8 +152,7 @@ router.get("/generate/:api", async (req, res, next) => {
         }
 
         
-
-        let isGenuineAPI = await API.findById(api)
+        let apiObject = await API.findByIdAndUpdate(api, { $inc: { transactionNumbers: 1 } })
 
         if(!isGenuineAPI) {
             return res.status(401).send({
