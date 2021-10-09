@@ -19,6 +19,26 @@ let corsOptions = {
     origin: FIRE_API_REGISTRATION_URL
 }
 
+router.get("/data/:id", cors(corsOptions), async (req, res) => {
+
+    let id = req.params.id;
+
+    if(!id) return res.status(400).send({message: "No ID Provided in the params"});
+
+    try {
+        let client = await Client.findById(id).populate("apis");
+
+        if(client === null) return res.status(404).send({message: "Client not found"});
+
+        let apiArray = client.apis
+        return res.status(200).send(apiArray)
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({message: "Error in getting the data"})
+    }
+
+})
 
 router.post("/register", cors(corsOptions), async (req, res, next) => {
     try {
