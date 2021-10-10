@@ -129,7 +129,7 @@ router.post("/api/register", cors(corsOptions), async (req, res, next) => {
 
             }
             else {
-                return res.status(401).send({ message: "Incorrect password" })
+                return res.status(401).send({ message: "Incorrect credentials" })
             }
         }
 
