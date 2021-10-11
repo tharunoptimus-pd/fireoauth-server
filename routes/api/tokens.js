@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
 let corsOptions = {
-    origin: FIRE_API_REGISTRATION_URL
+    origin: FIRE_API_TOKEN_GENERATOR_URL
 }
 
 router.post("/generate", cors(corsOptions), async (req, res) => {
