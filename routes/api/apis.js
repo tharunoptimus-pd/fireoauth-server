@@ -9,7 +9,7 @@ const Token = require("../../schemas/TokenSchema");
 const API = require("../../schemas/APISchema");
 const Client = require("../../schemas/ClientSchema");
 
-const FIRE_API_REGISTRATION_URL = "http://localhost:5500"
+const FIRE_API_REGISTRATION_URL = "https://fire-register.netlify.app"
 
 
 app.use(express.json())
