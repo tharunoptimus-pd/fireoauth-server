@@ -154,20 +154,20 @@ router.get("/generate/:api", async (req, res, next) => {
         
         let apiObject = await API.findByIdAndUpdate(api, { $inc: { transactionNumbers: 1 } })
 
-        if(!isGenuineAPI) {
+        if(!apiObject) {
             return res.status(401).send({
                 message: "Invalid API"
             })
         }
 
-        if(isGenuineAPI.domainName.substring(0, 5) === 'https' && req.protocol !== 'https') {
+        if(apiObject.domainName.substring(0, 5) === 'https' && req.protocol !== 'https') {
             return res.status(401).send({message: "Protocol must be https"})
         }
 
         // Uncomment this line to Use HTTPS for all API's
         // if(!protocol) return res.status(400).send({message: "Protocol must be https"})
 
-        if(isGenuineAPI.domainName != domainName) {
+        if(apiObject.domainName != domainName) {
             return res.status(401).send({
                 message: "Invalid domain name"
             })
