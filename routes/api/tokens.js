@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 const cryptoString = require('crypto-string')
@@ -8,18 +9,20 @@ const Token = require("../../schemas/TokenSchema");
 const API = require("../../schemas/APISchema");
 const Client = require("../../schemas/ClientSchema");
 
+const FIRE_API_TOKEN_GENERATOR_URL = "https://firepwa.netlify.app/"
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));
 
-router.post("/generate", async (req, res) => {
+let corsOptions = {
+    origin: FIRE_API_REGISTRATION_URL
+}
+
+router.post("/generate", cors(corsOptions), async (req, res) => {
 
     try {
         let sessionId = req.body.sessionId
         let userId = req.body.userId
-
-        // get the req.origin and continue only if the origin is valid
-        // todo
 
         if(! sessionId || ! userId) return res.status(400).send({message: "Missing sessionId or userId"})
 
