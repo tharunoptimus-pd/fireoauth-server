@@ -9,7 +9,7 @@ const Token = require("../../schemas/TokenSchema");
 const API = require("../../schemas/APISchema");
 const Client = require("../../schemas/ClientSchema");
 
-const FIRE_API_TOKEN_GENERATOR_URL = "https://firepwa.netlify.app/"
+const FIRE_API_TOKEN_GENERATOR_URL = "https://firepwa.netlify.app"
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}));

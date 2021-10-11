@@ -67,6 +67,7 @@ router.post("/register", cors(corsOptions), async (req, res, next) => {
             res.status(201).send(newUser)
         }
     } catch (err) {
+        console.log(error)
         res.status(500).send({ message: "Something is wrong with Fire Servers. Try again Later" })
     }
 })
@@ -98,6 +99,7 @@ router.post("/login", cors(corsOptions), async (req, res, next) => {
             }
         }
     } catch (err) {
+        console.log(error)
         res.status(500).send(err)
     }
 })
@@ -134,6 +136,7 @@ router.post("/api/register", cors(corsOptions), async (req, res, next) => {
         }
 
     } catch (err) {
+        console.log(error)
         res.status(500).send(err)
     }
 })
@@ -184,6 +187,7 @@ router.get("/generate/:api", async (req, res, next) => {
         res.status(201).send(data)
 
     } catch (error) {
+        console.log(error)
         res.status(500).send(error)
     }
 })
