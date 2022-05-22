@@ -10,7 +10,7 @@ const API = require("../../schemas/APISchema");
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
-
+app.enable('trust proxy');
 router.get("/", (req, res) => {
     res.send("meow"
     )
@@ -36,7 +36,7 @@ router.post("/register", async (req, res, next) => {
                 lastName,
                 email,
                 password,
-                profilePic: `https://avatars.dicebear.com/api/male/${firstName}${lastName}.svg?mood[]=happy`
+                profilePic: `https://avatars.dicebear.com/api/bottts/${firstName}${lastName}.svg?mood[]=happy`
             }
 
             let newUser = await User.create(newUserData)
