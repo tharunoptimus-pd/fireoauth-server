@@ -163,9 +163,9 @@ router.get("/generate/:api", async (req, res, next) => {
             })
         }
 
-        if(apiObject.domainName.substring(0, 5) === 'https' && req.protocol !== 'https') {
-            return res.status(401).send({message: "Protocol must be https"})
-        }
+        // if(apiObject.domainName.substring(0, 5) === 'https' && req.protocol !== 'https') {
+        //     return res.status(401).send({message: "Protocol must be https"})
+        // }
 
         // Uncomment this line to Use HTTPS for all API's
         // if(!protocol) return res.status(400).send({message: "Protocol must be https"})
